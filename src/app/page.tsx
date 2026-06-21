@@ -322,13 +322,13 @@ export default function Home() {
                 About Me
               </h2>
               <h3 className="text-3xl font-bold mb-6">
-                Bridging Software Engineering with Advanced AI
+                Building practical software systems powered by AI.
               </h3>
               <p className="text-zinc-400 leading-relaxed mb-6 text-sm md:text-base">
-                I hold a BS in Software Engineering from the Virtual University of Pakistan. My focus spans Computer Vision, Python GUI libraries, Embedded AI, and Large Language Model applications.
+                I'm a Software Engineering graduate focused on computer vision, embedded AI, and LLM applications.
               </p>
               <p className="text-zinc-400 leading-relaxed text-sm md:text-base">
-                As a developer at <strong>Computer Vision Zone</strong>, I lead implementations of offline, edge-optimized applications—ranging from private local LLM voice agents to embedded face recognition and n8n-based research pipelines.
+                At Computer Vision Zone, I developed backend classes to extend the capabilities of PyVisual, a Python-based GUI builder, alongside offline, edge-optimized AI systems including local voice agents, face recognition tools, and n8n-based research workflows.
               </p>
             </div>
 
