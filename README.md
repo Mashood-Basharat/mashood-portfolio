@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mashood Basharat — Portfolio
+
+Single-page portfolio built with **Next.js 16 (App Router)**, featuring an AI chatbot with RAG pipeline, course video showcases, and a dark indigo-purple theme.
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Styling:** Tailwind CSS v4
+- **Database:** Supabase (PostgreSQL + vector search)
+- **AI Chatbot:** Groq (llama-3.3-70b-versatile) + HuggingFace embeddings (bge-small-en-v1.5)
+- **Video:** react-player (YouTube)
+- **Fonts:** Geist (Vercel)
+
+## Features
+
+- Hero, About, Skills, Experience, Projects, Courses, Contact sections
+- AI chatbot with RAG — asks questions about my work, skills, and experience
+- Vector similarity search on a Supabase knowledge base
+- Course video demos with custom start times
+- Fully responsive with mobile hamburger menu
+- Dark theme throughout
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create `.env.local`:
 
-## Learn More
+```
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+GROQ_API_KEY=
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start dev server |
+| `npm run build` | Production build |
+| `npm run lint` | Lint check |
+| `npm run db:seed` | Re-seed the chatbot knowledge base |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project Structure
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+  app/
+    layout.tsx       — Root layout with chat bubble
+    page.tsx         — Single-page portfolio
+    api/
+      chat/route.ts  — RAG chatbot endpoint
+      seed/route.ts  — Re-seed knowledge base
+  components/
+    chat-bubble.tsx  — Floating AI chatbot
+    project-card.tsx — Project display card
+    video-embed.tsx  — YouTube player
+  lib/
+    embeddings.ts    — Embedding pipeline
+    seed.ts          — Knowledge base content
+    supabase.ts      — Public Supabase client
+    supabase-server.ts — Service-role client
+```
