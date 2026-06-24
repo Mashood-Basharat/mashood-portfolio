@@ -28,40 +28,37 @@ function getLatestMessageText(messages: unknown[]): string | undefined {
 }
 
 export async function POST(req: Request) {
-  const { messages } = await req.json();
+  try {
+    const { messages } = await req.json();
 
-  const latestMessage = getLatestMessageText(messages);
+    const latestMessage = getLatestMessageText(messages);
 
-  if (!latestMessage) {
-    return Response.json({ error: "No message provided." }, { status: 400 });
-  }
-
-  const queryEmbedding = await generateEmbedding(latestMessage);
-
-  const { data: documents, error } = await supabaseServer.rpc(
-    "match_portfolio_documents",
-    {
-      query_embedding: queryEmbedding,
-      match_count: 5,
+    if (!latestMessage) {
+      return Response.json({ error: "No message provided." }, { status: 400 });
     }
-  );
 
-  if (error) {
-    console.error("Supabase vector search error:", error);
-  }
+    const queryEmbedding = await generateEmbedding(latestMessage);
 
-  const contextText =
-    documents
-      ?.map((doc: {
-        source_title?: string | null;
-        document_type?: string;
-        content?: string;
-      }) => {
-        return `Source: ${doc.source_title || doc.document_type}\n${doc.content}`;
-      })
-      .join("\n\n") || "";
+    const { data: documents, error } = await supabaseServer.rpc(
+      "match_portfolio_documents",
+      {
+        query_embedding: queryEmbedding,
+        match_count: 5,
+      }
+    );
 
-  const systemPrompt = `You are Mashood Basharat's Portfolio AI Assistant. Answer questions about Mashood's background, skills, projects, experience, and portfolio.
+    if (error) {
+      console.error("Supabase vector search error:", error);
+    }
+
+    const contextText =
+      documents
+        ?.map((doc: { source_title?: string | null; document_type?: string; content?: string }) =>
+          `Source: ${doc.source_title || doc.document_type}\n${doc.content}`
+        )
+        .join("\n\n") || "";
+
+    const systemPrompt = `You are Mashood Basharat's Portfolio AI Assistant. Answer questions about Mashood's background, skills, projects, experience, and portfolio.
 
 Portfolio Context:
 ${contextText}
@@ -76,11 +73,16 @@ Rules:
 - Distinguish between featured portfolio projects (those demoed or displayed on the site) and academic or background projects (like FYP). Clarify when something is not featured on the portfolio.
 - If asked about hiring or collaboration, guide them to contact Mashood.`;
 
-  const result = streamText({
-    model: groq("llama-3.3-70b-versatile"),
-    system: systemPrompt,
-    messages: await convertToModelMessages(messages),
-  });
+    const result = streamText({
+      model: groq("llama-3.3-70b-versatile"),
+      system: systemPrompt,
+      messages: await convertToModelMessages(messages),
+    });
 
-  return result.toUIMessageStreamResponse();
+    return result.toUIMessageStreamResponse();
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown error";
+    console.error("Chat API error:", message, error);
+    return Response.json({ error: message }, { status: 500 });
+  }
 }
