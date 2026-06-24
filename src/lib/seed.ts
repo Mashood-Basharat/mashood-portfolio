@@ -58,6 +58,12 @@ const portfolioDocuments: DocumentSeed[] = [
       "Mashood built a Computer Vision Zone course on integrating Google Gemini-powered AI capabilities on Raspberry Pi hardware. The course covers how to leverage Gemini's free tier for AI applications on edge devices.",
   },
   {
+    document_type: "course",
+    source_title: "Learn Modern Computer Vision in 2026 Course",
+    content:
+      "Mashood created a Computer Vision Zone course covering modern computer vision from basics to advanced concepts and practical applications. The course covers foundational CV techniques, deep learning approaches, and real-world deployment strategies for building production CV systems.",
+  },
+  {
     document_type: "project",
     source_title: "AI Voice Agent on Raspberry Pi",
     content:

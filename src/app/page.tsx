@@ -30,7 +30,7 @@ interface Project {
   description: string;
   longDescription?: string;
   tech: string[];
-  githubUrl: string;
+  githubUrl?: string;
   liveUrl?: string;
 }
 
@@ -54,28 +54,26 @@ export default function Home() {
       description: "A locally deployed AI-powered voice assistant designed for private offline interaction, real-time voice communication, and personalized memory-based responses.",
       longDescription: "Built an offline voice AI system on Raspberry Pi using Hugging Face models deployed through Ollama (Phi-3.5), Faster-Whisper for speech recognition, and Kokoro for text-to-speech synthesis. Implemented personalized memory handling through JSON-based user context storage, enabling private conversational interaction without reliance on cloud-based AI services.",
       tech: ["Python", "Ollama", "Phi-3.5", "Faster-Whisper", "Kokoro TTS", "Raspberry Pi", "JSON"],
-      githubUrl: "https://github.com/Mashood-Basharat",
+      githubUrl: "https://github.com/Mashood-Basharat/ai-voice-assistant.git",
     },
     {
       title: "AI-Based Employee Attendance System",
       description: "A private edge-AI attendance system designed for real-time face recognition, local data storage, and offline employee monitoring on Raspberry Pi.",
       longDescription: "Built a Raspberry Pi-based attendance system using MediaPipe, OpenCV, and face recognition pipelines for automated employee identification and attendance marking. Developed a fully local boxed solution with webcam integration, real-time processing, and private on-device data storage without dependence on cloud services.",
       tech: ["Raspberry Pi", "MediaPipe", "OpenCV", "Python", "Face Recognition"],
-      githubUrl: "https://github.com/Mashood-Basharat",
+      githubUrl: "https://github.com/Mashood-Basharat/employee-management-system.git",
     },
     {
       title: "AI-Powered Tech News Monitoring & Research Automation",
       description: "A locally deployed news aggregation and research automation system designed for private monitoring of technology trends and automated content collection using n8n workflows.",
-      longDescription: "Developed an automated tech news intelligence workflow using n8n to collect and process technology news from sources such as TechCrunch and Hacker News. Configured RSS-based news ingestion pipelines to automatically gather newly published articles, metadata, publication dates, and source links from multiple technology news platforms. Implemented automated filtering and organization of news content based on publication date ranges, enabling continuous monitoring of recent developments in AI, robotics, startups, and software engineering. Designed an automated email reporting system that compiled, formatted, and delivered the latest technology news updates in a structured and professional email format.",
+      longDescription: "Developed an automated tech news intelligence workflow using n8n to collect and process technology news from sources such as TechCrunch and Hacker News. Configured RSS-based news ingestion pipelines to automatically gather newly published articles, metadata, publication dates, and source links from multiple technology news platforms. Designed an automated email reporting system that compiled, formatted, and delivered the latest technology news updates in a structured and professional email format.",
       tech: ["n8n", "RSS", "Automation", "Email API", "Python", "Workflows"],
-      githubUrl: "https://github.com/Mashood-Basharat",
     },
     {
       title: "PyVisual GUI Builder Library",
       description: "A Python-based GUI builder library with reusable OOP classes, interactive components, and custom GUI elements.",
       longDescription: "Contributed to PyVisual, a Python-based GUI builder library, by developing reusable Python classes, interactive UI components, and custom GUI elements using object-oriented programming and component-based architecture. Enabled developers to accelerate desktop app UI generation in Python.",
       tech: ["Python", "OOP", "GUI Library", "Component Architecture"],
-      githubUrl: "https://github.com/Mashood-Basharat",
     }
   ];
 
@@ -89,12 +87,12 @@ export default function Home() {
       tags: ["Raspberry Pi", "Stable Diffusion", "Course"]
     },
     {
-      id: "openmv-course",
-      title: "Learn OpenMV in 1 Hour",
-      description: "Computer Vision Zone course covering OpenMV fundamentals for embedded vision workflows.",
-      videoUrl: "https://www.youtube.com/watch?v=OnNxKCWjnK0",
-      thumbnailUrl: "https://i.ytimg.com/vi/OnNxKCWjnK0/hqdefault.jpg",
-      tags: ["OpenMV", "Computer Vision", "Course"]
+      id: "cv-2026-course",
+      title: "Learn Modern Computer Vision in 2026",
+      description: "Computer Vision Zone course covering modern computer vision from basics to advanced concepts and practical applications.",
+      videoUrl: "https://www.youtube.com/watch?v=E_zUoHGcxRE&start=3560",
+      thumbnailUrl: "https://i.ytimg.com/vi/E_zUoHGcxRE/hqdefault.jpg",
+      tags: ["Raspberry Pi", "Computer Vision", "Course"]
     },
     {
       id: "gemini-pi",
@@ -103,6 +101,14 @@ export default function Home() {
       videoUrl: "https://www.youtube.com/watch?v=wEg8gAOantI",
       thumbnailUrl: "https://i.ytimg.com/vi/wEg8gAOantI/hqdefault.jpg",
       tags: ["Raspberry Pi", "Gemini", "Course"]
+    },
+    {
+      id: "openmv-course",
+      title: "Learn OpenMV in 1 Hour",
+      description: "Computer Vision Zone course covering OpenMV fundamentals for embedded vision workflows.",
+      videoUrl: "https://www.youtube.com/watch?v=OnNxKCWjnK0",
+      thumbnailUrl: "https://i.ytimg.com/vi/OnNxKCWjnK0/hqdefault.jpg",
+      tags: ["OpenMV", "Computer Vision", "Course"]
     }
   ];
 
@@ -172,33 +178,44 @@ export default function Home() {
 
       {/* Navigation Header */}
       <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-zinc-950/70 border-b border-zinc-800/80 transition-all duration-200">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <a href="#" className="flex items-center space-x-2.5 group">
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-200">
-              MB
-            </div>
-            <span className="font-semibold text-lg tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-zinc-100 to-zinc-400 group-hover:text-white transition-colors duration-200">
-              Mashood Basharat
-            </span>
-          </a>
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center">
+          <div className="flex-none">
+            <a
+              href="#contact"
+              onClick={(e) => scrollIntoView(e, "contact")}
+              className="hidden md:inline-flex px-4 py-2 text-xs font-semibold text-white bg-zinc-800 hover:bg-zinc-700 border border-zinc-700/80 rounded-lg transition-all"
+            >
+              Hire Me
+            </a>
+          </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8 text-sm font-medium text-zinc-400">
-            <a href="#about" onClick={(e) => scrollIntoView(e, "about")} className="hover:text-white transition-colors">About</a>
-            <a href="#skills" onClick={(e) => scrollIntoView(e, "skills")} className="hover:text-white transition-colors">Skills</a>
-            <a href="#experience" onClick={(e) => scrollIntoView(e, "experience")} className="hover:text-white transition-colors">Experience</a>
-            <a href="#projects" onClick={(e) => scrollIntoView(e, "projects")} className="hover:text-white transition-colors">Projects</a>
-            <a href="#courses" onClick={(e) => scrollIntoView(e, "courses")} className="hover:text-white transition-colors">Courses</a>
-            <a href="#contact" onClick={(e) => scrollIntoView(e, "contact")} className="hover:text-white transition-colors">Contact</a>
-          </nav>
+          <div className="flex-1 flex justify-center">
+            <nav className="hidden md:flex items-center space-x-6 text-sm font-medium text-zinc-400">
+              <a href="#about" onClick={(e) => scrollIntoView(e, "about")} className="hover:text-white transition-colors">About</a>
+              <a href="#skills" onClick={(e) => scrollIntoView(e, "skills")} className="hover:text-white transition-colors">Skills</a>
+              <a href="#experience" onClick={(e) => scrollIntoView(e, "experience")} className="hover:text-white transition-colors">Experience</a>
+              <a href="#projects" onClick={(e) => scrollIntoView(e, "projects")} className="hover:text-white transition-colors">Projects</a>
+              <a href="#courses" onClick={(e) => scrollIntoView(e, "courses")} className="hover:text-white transition-colors">Courses</a>
+              <a href="#contact" onClick={(e) => scrollIntoView(e, "contact")} className="hover:text-white transition-colors">Contact</a>
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.dispatchEvent(new CustomEvent("open-chat"));
+                }}
+                className="text-indigo-400 hover:text-indigo-300 transition-colors"
+              >
+                Ask AI
+              </a>
+            </nav>
+          </div>
 
-          {/* Nav Actions */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="flex-none flex items-center space-x-4">
             <a
               href="https://github.com/Mashood-Basharat"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-zinc-400 hover:text-white hover:bg-zinc-800/50 rounded-lg transition-all"
+              className="hidden md:inline-flex p-2 text-zinc-400 hover:text-white hover:bg-zinc-800/50 rounded-lg transition-all"
               aria-label="GitHub Profile"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" /><path d="M9 18c-4.51 2-5-2-7-2" /></svg>
@@ -207,17 +224,10 @@ export default function Home() {
               href="https://www.linkedin.com/in/mashood-basharat-844b51243"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-zinc-400 hover:text-white hover:bg-zinc-800/50 rounded-lg transition-all"
+              className="hidden md:inline-flex p-2 text-zinc-400 hover:text-white hover:bg-zinc-800/50 rounded-lg transition-all"
               aria-label="LinkedIn Profile"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></svg>
-            </a>
-            <a
-              href="#contact"
-              onClick={(e) => scrollIntoView(e, "contact")}
-              className="px-4 py-2 text-xs font-semibold text-white bg-zinc-800 hover:bg-zinc-700 border border-zinc-700/80 rounded-lg transition-all"
-            >
-              Hire Me
             </a>
           </div>
 
@@ -240,6 +250,17 @@ export default function Home() {
             <a href="#projects" onClick={(e) => scrollIntoView(e, "projects")} className="text-zinc-400 hover:text-white py-1">Projects</a>
             <a href="#courses" onClick={(e) => scrollIntoView(e, "courses")} className="text-zinc-400 hover:text-white py-1">Courses</a>
             <a href="#contact" onClick={(e) => scrollIntoView(e, "contact")} className="text-zinc-400 hover:text-white py-1">Contact</a>
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                setMobileMenuOpen(false);
+                window.dispatchEvent(new CustomEvent("open-chat"));
+              }}
+              className="text-indigo-400 hover:text-indigo-300 py-1"
+            >
+              Ask AI
+            </a>
             <div className="h-px bg-zinc-800/60 my-4" />
             <div className="flex items-center space-x-6">
               <a

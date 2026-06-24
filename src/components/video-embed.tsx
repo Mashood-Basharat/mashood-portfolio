@@ -4,6 +4,11 @@ import dynamic from "next/dynamic";
 
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
+function getStartTime(url: string): number | undefined {
+  const match = url.match(/[?&]start=(\d+)/);
+  return match ? parseInt(match[1], 10) : undefined;
+}
+
 export interface VideoEmbedProps {
   url: string;
   playing?: boolean;
@@ -17,6 +22,19 @@ export default function VideoEmbed({
   onPlay,
   onPause,
 }: VideoEmbedProps) {
+  const startTime = getStartTime(url);
+
+  const playerVars: Record<string, string | number | undefined> = {
+    rel: 0,
+  };
+  if (startTime) {
+    playerVars.start = startTime;
+  }
+
+  const playerConfig = {
+    youtube: playerVars,
+  } as Record<string, unknown>;
+
   return (
     <div className="absolute inset-0 w-full h-full">
       <ReactPlayer
@@ -27,11 +45,7 @@ export default function VideoEmbed({
         playing={playing}
         onPlay={onPlay}
         onPause={onPause}
-        config={{
-          youtube: {
-            rel: 0,
-          },
-        }}
+        config={playerConfig}
       />
     </div>
   );
