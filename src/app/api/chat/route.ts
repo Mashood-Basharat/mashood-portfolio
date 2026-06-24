@@ -1,6 +1,5 @@
 import { groq } from "@ai-sdk/groq";
 import { convertToModelMessages, streamText } from "ai";
-import { generateEmbedding } from "@/lib/embeddings";
 import { supabaseServer } from "@/lib/supabase-server";
 
 export const maxDuration = 60;
@@ -37,7 +36,14 @@ export async function POST(req: Request) {
       return Response.json({ error: "No message provided." }, { status: 400 });
     }
 
-    const queryEmbedding = await generateEmbedding(latestMessage);
+    let queryEmbedding: number[];
+    try {
+      const { generateEmbedding } = await import("@/lib/embeddings");
+      queryEmbedding = await generateEmbedding(latestMessage);
+    } catch (embedErr) {
+      console.error("Embedding error:", embedErr);
+      queryEmbedding = new Array(384).fill(0);
+    }
 
     const { data: documents, error } = await (supabaseServer() as any).rpc(
       "match_portfolio_documents",
@@ -52,7 +58,7 @@ export async function POST(req: Request) {
     }
 
     const contextText =
-      documents
+      (documents as any[])
         ?.map((doc: { source_title?: string | null; document_type?: string; content?: string }) =>
           `Source: ${doc.source_title || doc.document_type}\n${doc.content}`
         )
