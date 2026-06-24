@@ -57,3 +57,12 @@ on projects
 for select
 to anon, authenticated
 using (true);
+
+-- Lock down document chunks — no direct public insert/update/delete
+alter table portfolio_documents enable row level security;
+
+create policy "Public can read portfolio_documents"
+on portfolio_documents
+for select
+to anon, authenticated
+using (true);
