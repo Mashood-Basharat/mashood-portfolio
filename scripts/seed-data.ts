@@ -8,11 +8,12 @@ async function main() {
   const { seedPortfolioDocuments, seedProjects } = await import("../src/lib/seed");
 
   console.log("Seeding portfolio_documents...");
-  const docs = await seedPortfolioDocuments(generateEmbedding, supabaseServer);
+  const db = supabaseServer();
+  const docs = await seedPortfolioDocuments(generateEmbedding, db);
   docs.forEach((title) => console.log(`  inserted: ${title}`));
 
   console.log("Seeding projects...");
-  const count = await seedProjects(supabaseServer);
+  const count = await seedProjects(db);
   console.log(`  inserted ${count} projects`);
 
   console.log("Seed complete.");

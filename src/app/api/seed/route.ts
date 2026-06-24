@@ -6,8 +6,9 @@ export const maxDuration = 120;
 
 export async function POST() {
   try {
-    const docs = await seedPortfolioDocuments(generateEmbedding, supabaseServer);
-    const projectCount = await seedProjects(supabaseServer);
+    const db = supabaseServer();
+    const docs = await seedPortfolioDocuments(generateEmbedding, db);
+    const projectCount = await seedProjects(db);
 
     return Response.json({
       success: true,

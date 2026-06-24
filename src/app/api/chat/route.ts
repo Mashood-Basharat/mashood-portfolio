@@ -39,7 +39,7 @@ export async function POST(req: Request) {
 
     const queryEmbedding = await generateEmbedding(latestMessage);
 
-    const { data: documents, error } = await supabaseServer.rpc(
+    const { data: documents, error } = await (supabaseServer() as any).rpc(
       "match_portfolio_documents",
       {
         query_embedding: queryEmbedding,
