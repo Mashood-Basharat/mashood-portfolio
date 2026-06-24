@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mashood Basharat | AI Developer & Computer Vision Engineer",
+  title: "Mashood Basharat | Computer Vision & AI Developer",
   description: "Portfolio of Mashood Basharat — Computer Vision & AI Developer specializing in RAG pipelines, edge AI, and LLM applications.",
 };
 
