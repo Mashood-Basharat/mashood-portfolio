@@ -13,27 +13,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const BASE_URL = "https://mashood-portfolio-nine.vercel.app";
-
 export const metadata: Metadata = {
   title: "Mashood Basharat | Computer Vision & AI Developer",
   description: "Portfolio of Mashood Basharat — Computer Vision & AI Developer specializing in RAG pipelines, edge AI, and LLM applications.",
-  openGraph: {
-    title: "Mashood Basharat | Computer Vision & AI Developer",
-    description:
-      "Portfolio of Mashood Basharat — Computer Vision & AI Developer. RAG pipelines, edge AI, real-time object detection, and LLM applications.",
-    url: BASE_URL,
-    siteName: "Mashood Basharat Portfolio",
-    type: "website",
-    images: [
-      {
-        url: `${BASE_URL}/og-image.png`,
-        width: 1200,
-        height: 630,
-        alt: "Mashood Basharat - Computer Vision & AI Developer",
-      },
-    ],
-  },
 };
 
 export default function RootLayout({
