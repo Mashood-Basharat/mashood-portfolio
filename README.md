@@ -1,1 +1,1 @@
-Mashood Basharat's [Portfolio](https://mashood-portfolio-nine.vercel.app) website.
+Mashood Basharat's <a href="https://mashood-portfolio-nine.vercel.app" target="_blank" rel="noopener noreferrer">Portfolio</a> website.
